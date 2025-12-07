@@ -1,6 +1,6 @@
 const path = require('path');
 const dotenv = require('dotenv');
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -18,7 +18,7 @@ if (!process.env.DATABASE_URL) {
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname,  'frontend')));
+app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -71,7 +71,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
 module.exports = app; 
